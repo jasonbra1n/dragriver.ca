@@ -1,6 +1,5 @@
-# Drag River Creative – Website Build Plan  
-**Project:** `drag-river-creative.com` (or `dragriver.ca`)  
-**Repo URL:** *(to be added)*  
+**Project:** `dragriver.ca`
+**Repo URL:** *[(https://github.com/jasonbra1n/dragriver.ca/)*]
 
 ---
 
