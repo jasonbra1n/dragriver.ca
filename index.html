@@ -334,6 +334,149 @@
             }
         }
 
+        /* Scroll to Top Button */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #00d4ff, #5b86e5);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: white;
+            box-shadow: 0 4px 20px rgba(0, 212, 255, 0.3);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transform: scale(0.8);
+        }
+
+        .scroll-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1);
+        }
+
+        .scroll-to-top:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(0, 212, 255, 0.4);
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 5rem 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #ffffff, #00d4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .contact-subtitle {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            margin-bottom: 3rem;
+        }
+
+        .contact-form {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 3rem;
+            backdrop-filter: blur(10px);
+            text-align: left;
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #00d4ff;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            color: white;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #00d4ff;
+            box-shadow: 0 0 0 2px rgba(0, 212, 255, 0.2);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #00d4ff, #5b86e5);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(0, 212, 255, 0.4);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .nav-menu {
@@ -354,6 +497,22 @@
 
             .brand-card {
                 padding: 2rem;
+            }
+
+            .scroll-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+                font-size: 1.1rem;
+            }
+
+            .contact-form {
+                padding: 2rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -388,6 +547,7 @@
                 <li><a href="#flow">Flow</a></li>
                 <li><a href="#retreat">Retreat</a></li>
                 <li><a href="#studio">Studio</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
             <div class="mobile-menu-btn">
                 <span></span>
@@ -440,6 +600,48 @@
         </div>
     </section>
 
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <h2 class="contact-title fade-in">Get In Touch</h2>
+        <p class="contact-subtitle fade-in">Ready to collaborate? Let's bring your creative vision to life.</p>
+        
+        <form class="contact-form fade-in" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="name">Name *</label>
+                    <input type="text" id="name" name="name" required placeholder="Your full name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" required placeholder="your@email.com">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="subject">Subject</label>
+                <select id="subject" name="subject">
+                    <option value="">Select a topic...</option>
+                    <option value="apparel">Apparel Inquiry</option>
+                    <option value="flow">Flow Dashboard</option>
+                    <option value="retreat">Retreat Booking</option>
+                    <option value="studio">Studio Services</option>
+                    <option value="collaboration">Collaboration</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="message">Message *</label>
+                <textarea id="message" name="message" required placeholder="Tell us about your project or inquiry..."></textarea>
+            </div>
+            
+            <button type="submit" class="submit-btn">Send Message</button>
+        </form>
+    </section>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" id="scrollToTop" aria-label="Scroll to top">↑</button>
+
     <!-- Footer -->
     <footer>
         <div class="footer-content">
@@ -487,8 +689,9 @@
             observer.observe(el);
         });
 
-        // Header scroll effect
-        let lastScrollY = window.scrollY;
+        // Scroll to top button functionality
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+        
         window.addEventListener('scroll', () => {
             const header = document.querySelector('header');
             if (window.scrollY > lastScrollY && window.scrollY > 100) {
@@ -496,7 +699,37 @@
             } else {
                 header.style.transform = 'translateY(0)';
             }
+            
+            // Show/hide scroll to top button
+            if (window.scrollY > 300) {
+                scrollToTopBtn.classList.add('visible');
+            } else {
+                scrollToTopBtn.classList.remove('visible');
+            }
+            
             lastScrollY = window.scrollY;
+        });
+
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Contact form enhancement
+        const contactForm = document.querySelector('.contact-form');
+        const submitBtn = contactForm.querySelector('.submit-btn');
+        
+        contactForm.addEventListener('submit', function(e) {
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+            
+            // Re-enable button after 3 seconds (in case of form submission issues)
+            setTimeout(() => {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Send Message';
+            }, 3000);
         });
 
         // Mobile menu toggle
