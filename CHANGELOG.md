@@ -28,6 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated `index.html` navigation and Events brand card to link directly to `https://events.dragriver.ca/`.
 - Updated `ROADMAP.md` and `SCRATCHPAD.md` with detailed API integration strategy (OpenWeatherMap, Environment Canada) for the Flow dashboard.
 - Reviewed documentation and corrected `README.md` to consistently refer to the "Shop" pillar (previously "Apparel").
+- Added "Support & Infrastructure" section to `ROADMAP.md` focusing on Donations and Starlink for live streaming.
 
 ## [v0.0.1] - 2025-12-25
 

@@ -62,3 +62,7 @@
         *   **Issue**: Existing electric dam blocks historical fish spawning paths.
         *   **Goal**: Restore river as a spawning bed; improve habitat and fishing resources.
         *   **Strategy**: Research phase -> Awareness campaign -> Habitat restoration.
+*   **Infrastructure**:
+    *   **Connectivity**: Current internet insufficient for HD live streaming.
+    *   **Solution**: Starlink is the only viable option at this location.
+    *   **Funding**: Implement donation mechanism to cover hardware/subscription costs.

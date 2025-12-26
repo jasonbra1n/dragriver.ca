@@ -13,6 +13,7 @@ This document tracks the high-level goals and milestones for **Drag River Creati
 - [x] **Refactor Nav Menu**: Standardize responsive behavior and styling across pages.
 - [x] **Backend Init**: Initialize `src/bootstrap.php` and verify path resolution.
 - [ ] **CI/CD**: Setup basic GitHub Actions for linting (HTML/CSS/PHP).
+- [ ] **Standardize UI**: Ensure "Scroll to Top" button is implemented across all subdomains.
 
 ---
 
@@ -52,6 +53,10 @@ This document tracks the high-level goals and milestones for **Drag River Creati
 - [ ] Design Events Calendar/Listing.
 - [ ] Create Event Detail Page.
 - [ ] Integration with "Camp" for on-site event bookings.
+
+### ❤️ Support & Infrastructure
+- [ ] Create "Donations" area/page to support project growth.
+- [ ] **Goal**: Fund Starlink Internet for HD Live Streaming (Flow).
 
 ---
 
