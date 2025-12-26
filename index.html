@@ -15,528 +15,7 @@
     <title>Drag River Creative</title>
     <meta name="description" content="Drag River Creative - A unified brand encompassing Apparel, Flow Dashboard, Retreat Bookings, and Studio Portfolio">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
-            color: #ffffff;
-            overflow-x: hidden;
-        }
-
-        /* Animated background */
-        .bg-animation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            opacity: 0.1;
-        }
-
-        .floating-orb {
-            position: absolute;
-            border-radius: 50%;
-            background: linear-gradient(45deg, #00d4ff, #5b86e5);
-            filter: blur(1px);
-            animation: float 20s infinite linear;
-        }
-
-        .floating-orb:nth-child(1) { width: 100px; height: 100px; top: 10%; left: 10%; animation-delay: 0s; }
-        .floating-orb:nth-child(2) { width: 60px; height: 60px; top: 60%; left: 80%; animation-delay: -5s; }
-        .floating-orb:nth-child(3) { width: 80px; height: 80px; top: 80%; left: 20%; animation-delay: -10s; }
-        .floating-orb:nth-child(4) { width: 120px; height: 120px; top: 30%; left: 70%; animation-delay: -15s; }
-
-        @keyframes float {
-            0% { transform: translate(0, 0) rotate(0deg); }
-            33% { transform: translate(30px, -30px) rotate(120deg); }
-            66% { transform: translate(-20px, 20px) rotate(240deg); }
-            100% { transform: translate(0, 0) rotate(360deg); }
-        }
-
-        /* Header */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            padding: 1rem 2rem;
-            background: rgba(15, 15, 35, 0.8);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #00d4ff, #5b86e5);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .nav-menu {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-menu a {
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .nav-menu a:hover {
-            color: #00d4ff;
-            transform: translateY(-2px);
-        }
-
-        .nav-menu a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 50%;
-            background: linear-gradient(135deg, #00d4ff, #5b86e5);
-            transition: all 0.3s ease;
-            transform: translateX(-50%);
-        }
-
-        .nav-menu a:hover::after {
-            width: 100%;
-        }
-
-        /* Mobile menu */
-        .mobile-menu-btn {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-        }
-
-        .mobile-menu-btn span {
-            width: 25px;
-            height: 3px;
-            background: #ffffff;
-            margin: 3px 0;
-            transition: 0.3s;
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 2rem;
-            position: relative;
-        }
-
-        .hero-content {
-            max-width: 800px;
-            z-index: 10;
-        }
-
-        .hero h1 {
-            font-size: clamp(3rem, 8vw, 6rem);
-            font-weight: 700;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, #ffffff, #00d4ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: fadeInUp 1s ease-out;
-        }
-
-        .hero p {
-            font-size: 1.25rem;
-            margin-bottom: 3rem;
-            opacity: 0.9;
-            animation: fadeInUp 1s ease-out 0.2s both;
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 1rem 2.5rem;
-            background: linear-gradient(135deg, #00d4ff, #5b86e5);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
-            animation: fadeInUp 1s ease-out 0.4s both;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.4);
-        }
-
-        /* Brand Grid */
-        .brands-section {
-            padding: 5rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .brands-title {
-            text-align: center;
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 3rem;
-            background: linear-gradient(135deg, #ffffff, #00d4ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .brands-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .brand-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 2.5rem;
-            text-align: center;
-            transition: all 0.4s ease;
-            backdrop-filter: blur(10px);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .brand-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(135deg, #00d4ff, #5b86e5);
-            transform: scaleX(0);
-            transition: transform 0.4s ease;
-        }
-
-        .brand-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .brand-card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(0, 212, 255, 0.3);
-            box-shadow: 0 20px 50px rgba(0, 212, 255, 0.1);
-        }
-
-        .brand-icon {
-            width: 60px;
-            height: 60px;
-            margin: 0 auto 1.5rem;
-            background: linear-gradient(135deg, #00d4ff, #5b86e5);
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-
-        .brand-card h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: #00d4ff;
-        }
-
-        .brand-card p {
-            opacity: 0.8;
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
-        }
-
-        .brand-status {
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            background: rgba(91, 134, 229, 0.2);
-            color: #5b86e5;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 3rem 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            background: rgba(15, 15, 35, 0.8);
-        }
-
-        .footer-content {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .footer-content p {
-            opacity: 0.7;
-            margin-bottom: 2rem;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .social-links a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 50px;
-            height: 50px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: white;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background: linear-gradient(135deg, #00d4ff, #5b86e5);
-            transform: translateY(-3px);
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Scroll to Top Button */
-        .scroll-to-top {
-            position: fixed;
-            bottom: 30px;
-            left: 30px;
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, #00d4ff, #5b86e5);
-            border: none;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            color: white;
-            box-shadow: 0 4px 20px rgba(0, 212, 255, 0.3);
-            transition: all 0.3s ease;
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transform: scale(0.8);
-        }
-
-        .scroll-to-top.visible {
-            opacity: 1;
-            visibility: visible;
-            transform: scale(1);
-        }
-
-        .scroll-to-top:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 25px rgba(0, 212, 255, 0.4);
-        }
-
-        /* Contact Section */
-        .contact-section {
-            padding: 5rem 2rem;
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .contact-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, #ffffff, #00d4ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .contact-subtitle {
-            font-size: 1.1rem;
-            opacity: 0.8;
-            margin-bottom: 3rem;
-        }
-
-        .contact-form {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 3rem;
-            backdrop-filter: blur(10px);
-            text-align: left;
-        }
-
-        .form-group {
-            margin-bottom: 2rem;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            color: #00d4ff;
-        }
-
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 1rem;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            color: white;
-            font-family: inherit;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: #00d4ff;
-            box-shadow: 0 0 0 2px rgba(0, 212, 255, 0.2);
-            background: rgba(255, 255, 255, 0.08);
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-
-        .form-group input::placeholder,
-        .form-group textarea::placeholder {
-            color: rgba(255, 255, 255, 0.5);
-        }
-
-        .submit-btn {
-            width: 100%;
-            padding: 1rem 2rem;
-            background: linear-gradient(135deg, #00d4ff, #5b86e5);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
-        }
-
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 35px rgba(0, 212, 255, 0.4);
-        }
-
-        .submit-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav-menu {
-                display: none;
-            }
-
-            .mobile-menu-btn {
-                display: flex;
-            }
-
-            .hero h1 {
-                font-size: 3rem;
-            }
-
-            .brands-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .brand-card {
-                padding: 2rem;
-            }
-
-            .scroll-to-top {
-                bottom: 20px;
-                right: 20px;
-                width: 45px;
-                height: 45px;
-                font-size: 1.1rem;
-            }
-
-            .contact-form {
-                padding: 2rem;
-            }
-
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Scroll effects */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.8s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    </style>
+    <link rel="stylesheet" href="public/styles.css">
 </head>
 <body>
     <!-- Animated Background -->
@@ -550,12 +29,13 @@
     <!-- Header -->
     <header>
         <nav class="nav-container">
-            <div class="logo">Drag River</div>
+            <a href="#" class="logo">Drag River</a>
             <ul class="nav-menu">
                 <li><a href="#apparel">Apparel</a></li>
-                <li><a href="#flow">Flow</a></li>
+                <li><a href="https://flow.dragriver.ca/">Flow</a></li>
                 <li><a href="#retreat">Retreat</a></li>
                 <li><a href="#studio">Studio</a></li>
+                <li><a href="#events">Events</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
             <div class="mobile-menu-btn">
@@ -590,6 +70,7 @@
                 <div class="brand-icon">F</div>
                 <h3>Flow</h3>
                 <p>Advanced environmental dashboard combining real-time weather data with customizable monitoring tools for optimal decision making.</p>
+                <a href="https://flow.dragriver.ca/" style="display: inline-block; margin-bottom: 1rem; color: #00d4ff; text-decoration: none; font-weight: 600;">Launch Dashboard →</a><br>
                 <span class="brand-status">In Development</span>
             </div>
 
@@ -605,6 +86,31 @@
                 <h3>Studio</h3>
                 <p>Creative portfolio showcase, educational workshops, and collaborative spaces where ideas transform into reality.</p>
                 <span class="brand-status">Portfolio Ready</span>
+            </div>
+
+            <div class="brand-card fade-in" id="events">
+                <div class="brand-icon">E</div>
+                <h3>Events</h3>
+                <p>Community gatherings, workshops, and pop-up experiences that bring the Drag River ecosystem to life.</p>
+                <span class="brand-status">Coming Soon</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section (Stolen from temp.html) -->
+    <section class="stats-section fade-in">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <span class="stat-number" data-target="5" data-suffix="">0</span>
+                <span class="stat-label">Core Pillars</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" data-target="100" data-suffix="%">0%</span>
+                <span class="stat-label">Haliburton Based</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" data-target="24" data-suffix="/7">0/7</span>
+                <span class="stat-label">Flow Monitoring</span>
             </div>
         </div>
     </section>
@@ -634,6 +140,7 @@
                     <option value="flow">Flow Dashboard</option>
                     <option value="retreat">Retreat Booking</option>
                     <option value="studio">Studio Services</option>
+                    <option value="events">Events & Tickets</option>
                     <option value="collaboration">Collaboration</option>
                     <option value="other">Other</option>
                 </select>
@@ -648,8 +155,37 @@
         </form>
     </section>
 
+    <!-- FAQ Section (Stolen from temp.html) -->
+    <section class="faq-section fade-in">
+        <h2 class="brands-title" style="font-size: 2rem; margin-bottom: 2rem;">Common Questions</h2>
+        <div class="faq-item">
+            <button class="faq-question">
+                <span>When will the Apparel store launch?</span>
+                <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+                We are currently finalizing our initial collection. Expect a limited drop in Q3 2025.
+            </div>
+        </div>
+        <div class="faq-item">
+            <button class="faq-question">
+                <span>Can I book the Retreat space now?</span>
+                <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+                Retreat bookings are currently by invitation only. Please use the contact form to express your interest.
+            </div>
+        </div>
+    </section>
+
     <!-- Scroll to Top Button -->
     <button class="scroll-to-top" id="scrollToTop" aria-label="Scroll to top">↑</button>
+    
+    <!-- Sticky CTA (Stolen from temp.html) -->
+    <a href="#contact" class="sticky-cta">
+        <span>Let's Talk</span>
+        <span>→</span>
+    </a>
 
     <!-- Footer -->
     <footer>
@@ -665,122 +201,6 @@
         </div>
     </footer>
 
-    <script>
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Header scroll effect and scroll to top button
-        let lastScrollY = window.scrollY;
-        const scrollToTopBtn = document.getElementById('scrollToTop');
-        
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            if (window.scrollY > lastScrollY && window.scrollY > 100) {
-                header.style.transform = 'translateY(-100%)';
-            } else {
-                header.style.transform = 'translateY(0)';
-            }
-            
-            // Show/hide scroll to top button
-            if (window.scrollY > 300) {
-                scrollToTopBtn.classList.add('visible');
-            } else {
-                scrollToTopBtn.classList.remove('visible');
-            }
-            
-            lastScrollY = window.scrollY;
-        });
-
-        scrollToTopBtn.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-
-        // Contact form enhancement
-        const contactForm = document.querySelector('.contact-form');
-        const submitBtn = contactForm.querySelector('.submit-btn');
-        
-        contactForm.addEventListener('submit', function(e) {
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Sending...';
-            
-            // Re-enable button after 3 seconds (in case of form submission issues)
-            setTimeout(() => {
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'Send Message';
-            }, 3000);
-        });
-
-        // Mobile menu toggle
-        const mobileBtn = document.querySelector('.mobile-menu-btn');
-        const navMenu = document.querySelector('.nav-menu');
-        
-        mobileBtn.addEventListener('click', () => {
-            navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
-        });
-
-        // Parallax effect for floating orbs
-        window.addEventListener('mousemove', (e) => {
-            const orbs = document.querySelectorAll('.floating-orb');
-            const x = e.clientX / window.innerWidth;
-            const y = e.clientY / window.innerHeight;
-            
-            orbs.forEach((orb, index) => {
-                const speed = (index + 1) * 0.5;
-                orb.style.transform += ` translate(${x * speed}px, ${y * speed}px)`;
-            });
-        });
-
-        // Dynamic gradient based on time of day
-        const updateGradient = () => {
-            const hour = new Date().getHours();
-            const body = document.body;
-            
-            if (hour >= 6 && hour < 12) {
-                // Morning
-                body.style.background = 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%)';
-            } else if (hour >= 12 && hour < 18) {
-                // Afternoon
-                body.style.background = 'linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%)';
-            } else {
-                // Evening/Night
-                body.style.background = 'linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%)';
-            }
-        };
-
-        updateGradient();
-        setInterval(updateGradient, 60000); // Update every minute
-    </script>
+    <script src="public/script.js"></script>
 </body>
 </html>
