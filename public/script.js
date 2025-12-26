@@ -82,6 +82,15 @@ mobileBtn.addEventListener('click', () => {
     navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
 });
 
+// Close mobile menu when a link is clicked
+navMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+        if (window.getComputedStyle(mobileBtn).display !== 'none') {
+            navMenu.style.display = 'none';
+        }
+    });
+});
+
 // Parallax effect for floating orbs
 window.addEventListener('mousemove', (e) => {
     const orbs = document.querySelectorAll('.floating-orb');

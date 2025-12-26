@@ -433,6 +433,11 @@ footer {
     background: rgba(255, 255, 255, 0.08);
 }
 
+.form-group select option {
+    background-color: #1a1a2e;
+    color: #ffffff;
+}
+
 .form-group textarea {
     resize: vertical;
     min-height: 120px;
