@@ -35,9 +35,9 @@ The website hosts all five pillars under a single domain with clear navigation, 
 ├── .github/           # GitHub workflows & templates
 ├── public/            # Web root (Assets, CSS, JS)
 │   ├── styles.css
-│   └── script.js
-├── src/               # Backend logic (Bootstrap, Config)
-│   └── bootstrap.php
+│   ├── script.js
+│   └── src/               # Backend logic (Bootstrap, Config)
+│       └── bootstrap.php
 ├── index.html         # Entry point
 └── README.md
 ```
