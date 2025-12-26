@@ -1,7 +1,7 @@
 # Drag River Creative
 
 **URL**: https://dragriver.ca
-**Repository**: https://github.com/jasonbra1n/dragriver.ca
+**Repository**: https://github.com/Drag-River/dragriver.ca
 
 ---
 
@@ -33,9 +33,13 @@ The website hosts all five pillars under a single domain with clear navigation, 
 /
 ├── .gemini/           # AI Context & Documentation
 ├── .github/           # GitHub workflows & templates
+├── docs/              # Technical Documentation
 ├── public/            # Web root (Assets, CSS, JS)
 │   ├── styles.css
 │   ├── script.js
+│   ├── events/            # Events (Subdomain)
+│   ├── flow/              # Flow Dashboard (Subdomain)
+│   ├── shop/              # Shop (Subdomain)
 │   └── src/               # Backend logic (Bootstrap, Config)
 │       └── bootstrap.php
 ├── index.html         # Entry point
@@ -46,7 +50,7 @@ The website hosts all five pillars under a single domain with clear navigation, 
 
 1.  **Clone the repository**
     ```bash
-    git clone https://github.com/jasonbra1n/dragriver.ca.git
+    git clone https://github.com/Drag-River/dragriver.ca.git
     ```
 2.  **Serve the project**
     Since this is currently a static/PHP hybrid, you can use the built-in PHP server:

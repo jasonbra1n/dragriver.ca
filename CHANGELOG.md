@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Created `docs/index.md` as the central hub for technical documentation.
+
+### Changed
+- Updated `README.md` project structure to explicitly list `docs/`, `public/events/`, `public/flow/`, and `public/shop/` directories, reflecting the cPanel subdomain architecture.
+- Updated repository URLs in documentation to reflect the move to the `Drag-River` organization.
+
 ## [v0.0.2] - 2025-12-26
 
 ### Added

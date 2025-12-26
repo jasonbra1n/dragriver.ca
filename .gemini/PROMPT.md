@@ -6,7 +6,7 @@ PERSONA.md
 **Name**: Drag River Creative
 **URL**: https://dragriver.ca
 **Description**: A unified creative ecosystem in Haliburton, Ontario, encompassing Apparel, Flow (Data), Retreats, and Studio work.
-**Repository**: https://github.com/jasonbra1n/dragriver.ca
+**Repository**: https://github.com/Drag-River/dragriver.ca
 </PROJECT_INFO>
 
 <TECH_STACK>
