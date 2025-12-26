@@ -79,6 +79,7 @@ const mobileBtn = document.querySelector('.mobile-menu-btn');
 const navMenu = document.querySelector('.nav-menu');
 
 mobileBtn.addEventListener('click', () => {
+    mobileBtn.classList.toggle('active');
     navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
 });
 
@@ -87,6 +88,7 @@ navMenu.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => {
         if (window.getComputedStyle(mobileBtn).display !== 'none') {
             navMenu.style.display = 'none';
+            mobileBtn.classList.remove('active');
         }
     });
 });
