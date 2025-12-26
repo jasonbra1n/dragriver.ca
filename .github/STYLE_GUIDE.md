@@ -61,6 +61,13 @@ Glassmorphism effect with a top gradient border on hover.
 ### Navigation
 - **Desktop**: Horizontal flex row.
 - **Mobile**: Vertical stack, absolute positioning, dark backdrop.
+- **Menu Toggle**: Animated hamburger icon that transforms into an 'X' when active.
+```css
+/* Active State Animation */
+.mobile-menu-btn.active span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+.mobile-menu-btn.active span:nth-child(2) { opacity: 0; }
+.mobile-menu-btn.active span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+```
 
 ---
 

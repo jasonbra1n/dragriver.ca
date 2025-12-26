@@ -16,9 +16,9 @@ error_reporting(E_ALL);
 // 1. Bootstrap Application
 // Loads global configuration, database connections, and helper functions.
 // We check multiple paths to handle differences between Local (nested) and cPanel (flat/subdomain) structures.
+// With src inside public, the relative path is consistent: ../src/bootstrap.php
 $bootstrapPaths = [
-    __DIR__ . '/../../src/bootstrap.php', // Local: public/flow/ -> src/
-    __DIR__ . '/../src/bootstrap.php',    // cPanel: public_html/flow/ -> public_html/src/
+    __DIR__ . '/../src/bootstrap.php',
 ];
 
 $bootstrapLoaded = false;
@@ -51,7 +51,7 @@ $dashboardData = [
 
 // 4. Render View
 // Currently loading the static HTML template.
-$viewPath = __DIR__ . '/flow.html';
+$viewPath = __DIR__ . '/view.php';
 
 if (file_exists($viewPath)) {
     include $viewPath;

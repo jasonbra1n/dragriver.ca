@@ -11,7 +11,7 @@ Drag River Creative is a unified creative ecosystem based in Haliburton, Ontario
 
 | Sub‑Brand | Purpose |
 |-----------|---------|
-| **Apparel** | E‑commerce store for apparel & accessories. |
+| **Shop** | E‑commerce for apparel, prints, and calendars. |
 | **Flow (Web App)** | Environment‑variables + weather dashboard. |
 | **Retreat** | Booking & information portal for private meeting/camp space. |
 | **Studio** | Portfolio, blog, and workshop scheduling. |
