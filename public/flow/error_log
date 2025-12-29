@@ -1,0 +1,18 @@
+[29-Dec-2025 13:34:31 UTC] WeatherService: Failed to fetch data from OWM API.
+[29-Dec-2025 13:34:43 UTC] WeatherService: Failed to fetch data from OWM API.
+[29-Dec-2025 13:35:03 UTC] WeatherService: Failed to fetch data from OWM API.
+[29-Dec-2025 13:37:11 UTC] WeatherService: Failed to fetch data from OWM API.
+[29-Dec-2025 13:37:36 UTC] WeatherService: Failed to fetch data from OWM API.
+[29-Dec-2025 13:37:43 UTC] WeatherService: Failed to fetch data from OWM API.
+[29-Dec-2025 13:37:59 UTC] WeatherService: Failed to fetch data from OWM API.
+[29-Dec-2025 13:38:53 UTC] WeatherService: Failed to fetch data from OWM API.
+[29-Dec-2025 13:40:35 UTC] WeatherService: Failed to fetch data from OWM API.
+[29-Dec-2025 13:41:41 UTC] WeatherService: Failed to fetch data from OWM API. Details: file_get_contents(https://api.openweathermap.org/data/3.0/onecall?lat=45.07&amp;lon=-78.43&amp;units=metric&amp;lang=en&amp;appid=5e6b0ecdb3f092913550d4271f224d28&amp;exclude=minutely): Failed to open stream: HTTP request failed! HTTP/1.1 401 Unauthorized
+ | Headers: HTTP/1.1 401 Unauthorized, Date: Mon, 29 Dec 2025 13:41:41 GMT, Content-Type: application/json; charset=utf-8, Content-Length: 338, Connection: close, X-Cache-Key: /data/3.0/onecall?exclude=minutely&lang=en&lat=45.07&lon=-78.43&units=metric, Access-Control-Allow-Origin: *, Access-Control-Allow-Credentials: true, Access-Control-Allow-Methods: GET, POST
+[29-Dec-2025 13:41:41 UTC] WeatherService: Debug URL: https://api.openweathermap.org/data/3.0/onecall?lat=45.07&lon=-78.43&units=metric&lang=en&appid=REDACTED&exclude=minutely
+[29-Dec-2025 13:42:21 UTC] WeatherService: Failed to fetch data from OWM API. Details: file_get_contents(https://api.openweathermap.org/data/3.0/onecall?lat=45.07&amp;lon=-78.43&amp;units=metric&amp;lang=en&amp;appid=5e6b0ecdb3f092913550d4271f224d28&amp;exclude=minutely): Failed to open stream: HTTP request failed! HTTP/1.1 401 Unauthorized
+ | Headers: HTTP/1.1 401 Unauthorized, Date: Mon, 29 Dec 2025 13:42:21 GMT, Content-Type: application/json; charset=utf-8, Content-Length: 338, Connection: close, X-Cache-Key: /data/3.0/onecall?exclude=minutely&lang=en&lat=45.07&lon=-78.43&units=metric, Access-Control-Allow-Origin: *, Access-Control-Allow-Credentials: true, Access-Control-Allow-Methods: GET, POST
+[29-Dec-2025 13:42:21 UTC] WeatherService: Debug URL: https://api.openweathermap.org/data/3.0/onecall?lat=45.07&lon=-78.43&units=metric&lang=en&appid=REDACTED&exclude=minutely
+[29-Dec-2025 13:44:45 UTC] WeatherService: Failed to fetch data from OWM API. Details: file_get_contents(https://api.openweathermap.org/data/3.0/onecall?lat=45.07&amp;lon=-78.43&amp;units=metric&amp;lang=en&amp;appid=5e6b0ecdb3f092913550d4271f224d28&amp;exclude=minutely): Failed to open stream: HTTP request failed! HTTP/1.1 401 Unauthorized
+ | Headers: HTTP/1.1 401 Unauthorized, Date: Mon, 29 Dec 2025 13:44:45 GMT, Content-Type: application/json; charset=utf-8, Content-Length: 338, Connection: close, X-Cache-Key: /data/3.0/onecall?exclude=minutely&lang=en&lat=45.07&lon=-78.43&units=metric, Access-Control-Allow-Origin: *, Access-Control-Allow-Credentials: true, Access-Control-Allow-Methods: GET, POST
+[29-Dec-2025 13:44:45 UTC] WeatherService: Debug URL: https://api.openweathermap.org/data/3.0/onecall?lat=45.07&lon=-78.43&units=metric&lang=en&appid=REDACTED&exclude=minutely

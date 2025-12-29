@@ -7,12 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v0.0.3] - 2025-12-29
+
 ### Added
 - Created `docs/index.md` as the central hub for technical documentation.
+- Integrated OpenWeatherMap Air Pollution API into `WeatherService.php` and `public/flow/view.php` to display real-time Air Quality Index (AQI).
+- Added "Scroll to Top" button to `public/flow/view.php` and `public/shop/view.php`.
+- Added safety checks to `public/script.js` to prevent errors when elements (like contact form) are missing from the current view.
+- Added `public/src/config.example.php` and updated `.gitignore` to exclude `public/src/config.php` from version control.
 
 ### Changed
 - Updated `README.md` project structure to explicitly list `docs/`, `public/events/`, `public/flow/`, and `public/shop/` directories, reflecting the cPanel subdomain architecture.
 - Updated repository URLs in documentation to reflect the move to the `Drag-River` organization.
+- Updated `WeatherService.php` to fetch "Feels Like" temperature and "Cloud Cover" percentage, replacing static "Heat Index" and "Lightning" data.
+- Switched Hydrology data source in `WeatherService.php` from Environment Canada CSV (deprecated) to a Parks Canada web scraper for Drag Lake levels (Note: Implementation currently unstable).
+- Updated `public/flow/view.php` and `public/shop/view.php` to use absolute URLs for CSS and JS assets to ensure correct loading on subdomains.
+- Updated `README.md` with instructions for setting up the environment configuration.
 
 ## [v0.0.2] - 2025-12-26
 

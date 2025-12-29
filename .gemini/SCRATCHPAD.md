@@ -19,10 +19,16 @@
 - [x] **Shop View**: Create `public/shop/view.php` (Converted from HTML).
 - [ ] **Flow Data**: Connect `public/flow/index.php` to real weather API (OpenWeatherMap).
 - [x] **Flow Cams**: Integrated YouTube & Nest embeds into `public/flow/view.php`.
+- [ ] **Flow Fixes**: Address Water Level, Alerts, Chart, and static Environmental cards.
+
+## 🐛 Flow Debugging & Fixes
+1.  **Chart Blank**: "24-Hour Temperature Trend" is still problematic despite JS path fixes. -> *Action: Deep dive into Chart.js initialization and canvas context on next session.*
+2.  **Weather Alerts**: OpenWeatherMap Alerts are paid. -> *Plan: Use Environment Canada RSS/Atom feeds (CAP protocol) for "Haliburton" region. Free and official.*
+3.  **Water Level**: Parks Canada scraper implemented but currently unstable. -> *Action: Debug scraper logic or find alternative.*
+4.  **Metrics**: "Heat Index" fixed (switched to Feels Like). "Lightning" fixed (switched to Cloud Cover).
 
 ## 🌊 Flow Data Strategy
-*   **Atmosphere**: Use **OpenWeatherMap One Call 3.0** (Free tier: 1,000 calls/day).
-    *   *Data*: Temp, Humidity, Pressure, UV Index, Wind Speed/Dir, Hourly Forecast, Daily Forecast, Alerts.
+*   **Atmosphere**: Use **OpenWeatherMap Standard API** (Current Weather + 5 Day Forecast).
 *   **Air Quality**: Use **OpenWeatherMap Air Pollution API**.
 *   **Hydrology**: Use **Environment Canada Water Office** (Datamart/CSV).
     *   *Target*: Find station ID for Drag River or nearest equivalent (e.g., Burnt River system).

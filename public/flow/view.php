@@ -1,7 +1,71 @@
 <?php
-// Simple bootstrap check
-$bootstrapPaths = [__DIR__ . '/../src/bootstrap.php'];
-foreach ($bootstrapPaths as $path) { if (file_exists($path)) { require_once $path; break; } }
+// This view is included by index.php, which has already loaded the bootstrap and data.
+// The $weatherData object is available here.
+
+// --- Helper Functions & Data Preparation ---
+
+$isDataAvailable = isset($weatherData) && $weatherData !== null;
+
+function getUvIndexDescription(float $uvi): string {
+    if ($uvi < 3) return 'Low';
+    if ($uvi < 6) return 'Moderate';
+    if ($uvi < 8) return 'High';
+    if ($uvi < 11) return 'Very High';
+    return 'Extreme';
+}
+
+function getWeatherIcon(string $iconCode): string {
+    $map = [
+        '01d' => '☀️', '01n' => '🌙', // clear sky
+        '02d' => '⛅', '02n' => '☁️', // few clouds
+        '03d' => '☁️', '03n' => '☁️', // scattered clouds
+        '04d' => '☁️', '04n' => '☁️', // broken clouds
+        '09d' => '🌧️', '09n' => '🌧️', // shower rain
+        '10d' => '🌦️', '10n' => '🌧️', // rain
+        '11d' => '⛈️', '11n' => '⛈️', // thunderstorm
+        '13d' => '❄️', '13n' => '❄️', // snow
+        '50d' => '🌫️', '50n' => '🌫️', // mist
+    ];
+    return $map[$iconCode] ?? '❔';
+}
+
+function getAqiInfo(?int $aqi): array {
+    $map = [
+        1 => ['text' => 'Good', 'class' => 'good', 'desc' => 'Air quality is satisfactory', 'pct' => 20],
+        2 => ['text' => 'Fair', 'class' => 'moderate', 'desc' => 'Air quality is acceptable', 'pct' => 40],
+        3 => ['text' => 'Moderate', 'class' => 'moderate', 'desc' => 'Sensitive groups should reduce exertion', 'pct' => 60],
+        4 => ['text' => 'Poor', 'class' => 'poor', 'desc' => 'Unhealthy for sensitive groups', 'pct' => 80],
+        5 => ['text' => 'Very Poor', 'class' => 'poor', 'desc' => 'Health warnings of emergency conditions', 'pct' => 100],
+    ];
+    return $map[$aqi] ?? ['text' => 'N/A', 'class' => '', 'desc' => 'Data unavailable', 'pct' => 0];
+}
+
+// --- Dynamic Page Elements ---
+
+$statusText = $isDataAvailable ? 'Live Data Stream Active' : 'Data Stream Offline';
+$statusIcon = $isDataAvailable ? '🟢' : '🔴';
+
+// Current Conditions
+$currentTemp = $isDataAvailable ? round($weatherData->current->temp) : 'N/A';
+$currentFeelsLike = $isDataAvailable ? round($weatherData->current->feels_like) : 'N/A';
+$currentHumidity = $isDataAvailable ? $weatherData->current->humidity : 'N/A';
+$currentWind = $isDataAvailable ? round($weatherData->current->wind_speed * 3.6) : 'N/A'; // m/s to km/h
+$currentPressure = $isDataAvailable ? $weatherData->current->pressure : 'N/A';
+$currentClouds = $isDataAvailable ? $weatherData->current->clouds : 'N/A';
+$currentUvi = $isDataAvailable ? round($weatherData->current->uvi, 1) : 'N/A';
+$currentUviDesc = $isDataAvailable ? getUvIndexDescription($weatherData->current->uvi) : '';
+$currentAqi = $isDataAvailable ? getAqiInfo($weatherData->current->aqi ?? null) : getAqiInfo(null);
+
+// Alerts
+$alerts = $isDataAvailable && isset($weatherData->alerts) ? $weatherData->alerts : [];
+
+// Water Level
+$waterLevel = $isDataAvailable && isset($weatherData->water->level) ? $weatherData->water->level : null;
+$waterTime = $isDataAvailable && isset($weatherData->water->time) ? strtotime($weatherData->water->time) : null;
+
+// Forecast
+$dailyForecast = $isDataAvailable && isset($weatherData->daily) ? array_slice($weatherData->daily, 0, 7) : [];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,7 +110,7 @@ foreach ($bootstrapPaths as $path) { if (file_exists($path)) { require_once $pat
         <div class="page-header">
             <h1 class="page-title">Flow Dashboard</h1>
             <p class="page-subtitle">Advanced environmental monitoring with real-time weather data and customizable insights</p>
-            <span class="status-badge">🟢 Live Data Stream Active</span>
+            <span class="status-badge"><?= htmlspecialchars($statusIcon . ' ' . $statusText) ?></span>
         </div>
 
         <!-- Dashboard Grid -->
@@ -75,23 +139,23 @@ foreach ($bootstrapPaths as $path) { if (file_exists($path)) { require_once $pat
                 </h3>
                 <div class="stat-item">
                     <span class="stat-label">Temperature</span>
-                    <span class="stat-value" id="temp">22°C</span>
+                    <span class="stat-value" id="temp"><?= htmlspecialchars((string)$currentTemp) ?>°C</span>
                 </div>
                 <div class="stat-item">
                     <span class="stat-label">Humidity</span>
-                    <span class="stat-value" id="humidity">65%</span>
+                    <span class="stat-value" id="humidity"><?= htmlspecialchars((string)$currentHumidity) ?>%</span>
                 </div>
                 <div class="stat-item">
                     <span class="stat-label">Wind Speed</span>
-                    <span class="stat-value" id="wind">12 km/h</span>
+                    <span class="stat-value" id="wind"><?= htmlspecialchars((string)$currentWind) ?> km/h</span>
                 </div>
                 <div class="stat-item">
                     <span class="stat-label">Pressure</span>
-                    <span class="stat-value" id="pressure">1013 hPa</span>
+                    <span class="stat-value" id="pressure"><?= htmlspecialchars((string)$currentPressure) ?> hPa</span>
                 </div>
                 <div class="stat-item">
                     <span class="stat-label">UV Index</span>
-                    <span class="stat-value" id="uv">5 (Moderate)</span>
+                    <span class="stat-value" id="uv"><?= htmlspecialchars((string)$currentUvi) ?> <span class="uv-desc">(<?= htmlspecialchars($currentUviDesc) ?>)</span></span>
                 </div>
             </div>
 
@@ -101,14 +165,18 @@ foreach ($bootstrapPaths as $path) { if (file_exists($path)) { require_once $pat
                     <span class="card-icon">⚠️</span>
                     Active Alerts
                 </h3>
-                <div class="alert-item">
-                    <div class="alert-title">Wind Advisory</div>
-                    <div class="alert-desc">Strong winds expected this afternoon. Gusts up to 45 km/h possible.</div>
-                </div>
-                <div class="alert-item">
-                    <div class="alert-title">UV Warning</div>
-                    <div class="alert-desc">High UV levels forecasted. Sun protection recommended between 11 AM - 4 PM.</div>
-                </div>
+                <?php if (!empty($alerts)): ?>
+                    <?php foreach ($alerts as $alert): ?>
+                        <div class="alert-item">
+                            <div class="alert-title"><?= htmlspecialchars($alert->event) ?></div>
+                            <div class="alert-desc"><?= htmlspecialchars($alert->description) ?></div>
+                        </div>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <div class="alert-item no-alerts">
+                        <div class="alert-desc">No active weather alerts for this area.</div>
+                    </div>
+                <?php endif; ?>
             </div>
 
             <!-- Controls -->
@@ -146,48 +214,20 @@ foreach ($bootstrapPaths as $path) { if (file_exists($path)) { require_once $pat
                     7-Day Forecast
                 </h3>
                 <div class="forecast-grid">
-                    <div class="forecast-day">
-                        <div class="forecast-date">Today</div>
-                        <div class="forecast-icon">☀️</div>
-                        <div class="forecast-temp">22° / 15°</div>
-                        <div class="forecast-desc">Sunny</div>
-                    </div>
-                    <div class="forecast-day">
-                        <div class="forecast-date">Tomorrow</div>
-                        <div class="forecast-icon">⛅</div>
-                        <div class="forecast-temp">19° / 12°</div>
-                        <div class="forecast-desc">Partly Cloudy</div>
-                    </div>
-                    <div class="forecast-day">
-                        <div class="forecast-date">Wednesday</div>
-                        <div class="forecast-icon">🌧️</div>
-                        <div class="forecast-temp">16° / 9°</div>
-                        <div class="forecast-desc">Rain</div>
-                    </div>
-                    <div class="forecast-day">
-                        <div class="forecast-date">Thursday</div>
-                        <div class="forecast-icon">⛈️</div>
-                        <div class="forecast-temp">14° / 8°</div>
-                        <div class="forecast-desc">Thunderstorms</div>
-                    </div>
-                    <div class="forecast-day">
-                        <div class="forecast-date">Friday</div>
-                        <div class="forecast-icon">🌤️</div>
-                        <div class="forecast-temp">18° / 11°</div>
-                        <div class="forecast-desc">Partly Sunny</div>
-                    </div>
-                    <div class="forecast-day">
-                        <div class="forecast-date">Saturday</div>
-                        <div class="forecast-icon">☀️</div>
-                        <div class="forecast-temp">21° / 13°</div>
-                        <div class="forecast-desc">Sunny</div>
-                    </div>
-                    <div class="forecast-day">
-                        <div class="forecast-date">Sunday</div>
-                        <div class="forecast-icon">☀️</div>
-                        <div class="forecast-temp">24° / 16°</div>
-                        <div class="forecast-desc">Clear</div>
-                    </div>
+                    <?php if (!empty($dailyForecast)): ?>
+                        <?php foreach ($dailyForecast as $index => $day): ?>
+                            <div class="forecast-day">
+                                <div class="forecast-date"><?= $index === 0 ? 'Today' : date('D', $day->dt) ?></div>
+                                <div class="forecast-icon"><?= getWeatherIcon($day->weather[0]->icon ?? '01d') ?></div>
+                                <div class="forecast-temp"><?= round($day->temp->max) ?>° / <?= round($day->temp->min) ?>°</div>
+                                <div class="forecast-desc"><?= htmlspecialchars(ucwords($day->weather[0]->description ?? 'N/A')) ?></div>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <div class="forecast-day">
+                            <p>Forecast data is currently unavailable.</p>
+                        </div>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
@@ -273,29 +313,29 @@ foreach ($bootstrapPaths as $path) { if (file_exists($path)) { require_once $pat
                     <div class="env-header">
                         <span class="env-icon">🌱</span>
                         <h4>Air Quality Index</h4>
-                        <span class="env-value good">42 AQI</span>
+                        <span class="env-value <?= $currentAqi['class'] ?>"><?= $currentAqi['text'] ?> (<?= $weatherData->current->aqi ?? '?' ?>/5)</span>
                     </div>
                     <div class="env-bar">
-                        <div class="env-progress" style="width: 42%"></div>
+                        <div class="env-progress" style="width: <?= $currentAqi['pct'] ?>%"></div>
                     </div>
-                    <p class="env-status">Good - Air quality is satisfactory</p>
+                    <p class="env-status"><?= $currentAqi['desc'] ?></p>
                 </div>
                 <!-- ... (Rest of environmental cards remain unchanged) ... -->
                 <!-- Truncated for brevity, but full content is preserved in file creation -->
                 <div class="env-card">
                     <div class="env-header">
                         <span class="env-icon">💧</span>
-                        <h4>Water Level</h4>
-                        <span class="env-value normal">Normal</span>
+                        <h4>Drag Lake Level</h4>
+                        <span class="env-value normal"><?= $waterLevel ? number_format($waterLevel, 2) . ' m' : 'N/A' ?></span>
                     </div>
                     <div class="env-details">
                         <div class="detail-item">
-                            <span>Drag Lake:</span>
-                            <span>Normal</span>
+                            <span>Source:</span>
+                            <span>Parks Canada (Dams)</span>
                         </div>
                         <div class="detail-item">
                             <span>Last Update:</span>
-                            <span>2 hours ago</span>
+                            <span><?= $waterTime ? date('M j, g:i A', $waterTime) : 'Unknown' ?></span>
                         </div>
                     </div>
                 </div>
@@ -303,14 +343,15 @@ foreach ($bootstrapPaths as $path) { if (file_exists($path)) { require_once $pat
                 <div class="env-card">
                     <div class="env-header">
                         <span class="env-icon">🌡️</span>
-                        <h4>Heat Index</h4>
-                        <span class="env-value moderate">25°C</span>
+                        <h4>Feels Like</h4>
+                        <span class="env-value normal"><?= $currentFeelsLike ?>°C</span>
                     </div>
                     <div class="heat-scale">
-                        <div class="heat-marker" style="left: 30%"></div>
+                        <!-- Simple visual indicator based on temp (0% = -30C, 100% = 40C approx) -->
+                        <?php $heatPct = min(100, max(0, (($currentFeelsLike + 30) / 70) * 100)); ?>
+                        <div class="heat-marker" style="left: <?= $heatPct ?>%"></div>
                         <div class="scale-labels">
                             <span>Cold</span>
-                            <span>Warm</span>
                             <span>Hot</span>
                         </div>
                     </div>
@@ -318,23 +359,28 @@ foreach ($bootstrapPaths as $path) { if (file_exists($path)) { require_once $pat
 
                 <div class="env-card">
                     <div class="env-header">
-                        <span class="env-icon">⚡</span>
-                        <h4>Lightning Activity</h4>
-                        <span class="env-value safe">Low</span>
+                        <span class="env-icon">☁️</span>
+                        <h4>Cloud Cover</h4>
+                        <span class="env-value normal"><?= $currentClouds ?>%</span>
                     </div>
-                    <div class="lightning-map">
-                        <div class="strikes">
-                            <span class="strike" style="top: 60%; left: 30%"></span>
-                            <span class="strike" style="top: 40%; left: 70%"></span>
-                        </div>
-                        <p class="strike-count">3 strikes in last hour</p>
+                    <div class="env-bar">
+                        <div class="env-progress" style="width: <?= $currentClouds ?>%; background: linear-gradient(90deg, #a0aec0, #cbd5e0);"></div>
                     </div>
+                    <p class="env-status">Current sky coverage</p>
                 </div>
             </div>
         </div>
     </main>
 
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" id="scrollToTop" aria-label="Scroll to top">↑</button>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script>
+        // Pass PHP weather data to JavaScript
+        window.flowData = <?= json_encode($weatherData ?? []) ?>;
+        console.log("Flow Data Loaded:", window.flowData); // Debugging for Chart
+    </script>
     <script src="https://dragriver.ca/public/script.js"></script>
 </body>
 </html>

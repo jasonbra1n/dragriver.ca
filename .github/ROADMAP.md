@@ -29,12 +29,14 @@ This document tracks the high-level goals and milestones for **Drag River Creati
 - [ ] Product Dev: Begin photography for "2027 Deer Calendar" (Year-long project).
 
 ### 🌊 Flow (Dashboard) - `flow.dragriver.ca`
-- [ ] **Core Weather**: Integrate OpenWeatherMap One Call 3.0 (Temp, Humidity, Wind, UV, Forecast).
-- [ ] **Air Quality**: Integrate OpenWeatherMap Air Pollution API (AQI).
-- [ ] **Hydrology**: Connect Environment Canada Water Office API for Drag River/Lake levels.
-- [ ] **Backend**: Create `src/Services/WeatherService.php` with caching (Redis/File) to manage API rate limits.
-- [ ] **Frontend**: Connect `view.php` to fetch JSON data from backend instead of `script.js` simulation.
-- [ ] **Visualization**: Update Chart.js to render real 24h historical data.
+ - [x] **Core Weather**: Integrate OpenWeatherMap Standard API (Temp, Humidity, Wind, Forecast).
+ - [x] **Air Quality**: Integrate OpenWeatherMap Air Pollution API (AQI).
+ - [ ] **Hydrology**: Fix Parks Canada Data Scraper (Currently failing).
+ - [x] **Backend**: Create `src/Services/WeatherService.php` with caching (File-based) to manage API rate limits.
+ - [x] **Frontend**: Connect `view.php` to fetch JSON data from backend instead of `script.js` simulation.
+ - [ ] **Visualization**: Fix blank 24h Temperature Chart.
+ - [ ] **Alerts**: Integrate Environment Canada RSS for free weather alerts.
+ - [ ] **Metrics**: Connect "Heat Index" (switch to Feels Like) and remove/replace static Lightning card.
 - [x] Develop "Live Cams" area integrating "Little Kennisis Lake View" and Downtown Haliburton Nest Cam.
 - [ ] Launch "River Restoration" research initiative (Dam impact & Spawning beds).
 

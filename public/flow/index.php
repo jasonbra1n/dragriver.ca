@@ -41,13 +41,19 @@ $pageConfig = [
     'env'   => $config['env'] ?? 'production',
 ];
 
-// 3. Data Preparation (Placeholder)
-// TODO: [Phase 2] Integrate OpenWeatherMap API here to populate $weatherData.
-$dashboardData = [
-    'status' => 'active',
-    'last_updated' => date('Y-m-d H:i:s'),
-    'alerts' => []
-];
+// 3. Data Preparation
+// Load service-specific configuration and fetch data.
+
+// Load Flow-specific config (contains API keys)
+$flowConfig = require __DIR__ . '/../src/config.php';
+
+// Load and instantiate the Weather Service
+require_once __DIR__ . '/../src/Services/WeatherService.php';
+$weatherService = new DragRiver\Services\WeatherService($flowConfig);
+
+// Fetch weather data (from cache or live API)
+$weatherData = $weatherService->getWeatherData();
+
 
 // 4. Render View
 // Currently loading the static HTML template.

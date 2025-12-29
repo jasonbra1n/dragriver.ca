@@ -81,6 +81,9 @@
         </div>
     </main>
 
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" id="scrollToTop" aria-label="Scroll to top">↑</button>
+
     <script>
         // Set launch date: Jan 1, 2026 00:00:00 EST
         // Timestamp: 1767243600 (Jan 1 2026 05:00:00 UTC)

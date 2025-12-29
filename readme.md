@@ -41,7 +41,8 @@ The website hosts all five pillars under a single domain with clear navigation, 
 │   ├── flow/              # Flow Dashboard (Subdomain)
 │   ├── shop/              # Shop (Subdomain)
 │   └── src/               # Backend logic (Bootstrap, Config)
-│       └── bootstrap.php
+│       ├── bootstrap.php
+│       └── config.example.php
 ├── index.html         # Entry point
 └── README.md
 ```
