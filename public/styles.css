@@ -815,9 +815,13 @@ main {
     text-align: center;
 }
 
-.chart-canvas {
-    width: 100%;
+.chart-wrapper {
+    position: relative;
     height: 300px;
+    width: 100%;
+}
+
+.chart-canvas {
     background: rgba(255, 255, 255, 0.02);
     border-radius: 15px;
 }
