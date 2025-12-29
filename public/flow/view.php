@@ -288,7 +288,7 @@ $dailyForecast = $isDataAvailable && isset($weatherData->daily) ? array_slice($w
                     <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 10px;">
                         <iframe 
                             style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" 
-                            src="https://www.youtube.com/embed/rmEJrsiBkOQ" 
+                            src="https://www.youtube.com/embed/ebP3t9gY6VY"
                             title="Little Kennisis Lake Live Stream" 
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                             allowfullscreen>
