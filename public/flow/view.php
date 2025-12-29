@@ -89,7 +89,9 @@ $dailyForecast = $isDataAvailable && isset($weatherData->daily) ? array_slice($w
     <!-- Header -->
     <header>
         <nav class="nav-container">
-            <a href="https://dragriver.ca" class="logo">Drag River</a>
+            <a href="https://dragriver.ca" class="logo">
+                <img src="https://dragriver.ca/public/src/logo1.png" alt="Drag River" style="height: 40px; vertical-align: middle;">
+            </a>
             <ul class="nav-menu">
                 <li><a href="https://dragriver.ca" class="back-button">← Back to Home</a></li>
                 <li><a href="#dashboard" class="active">Dashboard</a></li>
@@ -237,7 +239,9 @@ $dailyForecast = $isDataAvailable && isset($weatherData->daily) ? array_slice($w
             <!-- Temperature Chart -->
             <div class="chart-container fade-in">
                 <h3 class="chart-title">24-Hour Temperature Trend</h3>
-                <canvas id="temperatureChart" class="chart-canvas"></canvas>
+                <div class="chart-wrapper">
+                    <canvas id="temperatureChart" class="chart-canvas"></canvas>
+                </div>
             </div>
 
             <!-- Additional Weather Maps -->

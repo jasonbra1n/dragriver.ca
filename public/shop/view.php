@@ -48,7 +48,9 @@
 
     <header>
         <nav class="nav-container">
-            <a href="https://dragriver.ca" class="logo">Drag River</a>
+            <a href="https://dragriver.ca" class="logo">
+                <img src="https://dragriver.ca/public/src/logo1.png" alt="Drag River" style="height: 40px; vertical-align: middle;">
+            </a>
             <ul class="nav-menu">
                 <li><a href="https://dragriver.ca" class="back-button">← Back to Home</a></li>
             </ul>

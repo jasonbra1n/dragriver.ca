@@ -71,7 +71,7 @@ foreach ($bootstrapPaths as $path) { if (file_exists($path)) { require_once $pat
                 <br>
                 <ul class="info-list">
                     <li><strong>Start:</strong> The Dam</li>
-                    <li><strong>Finish:</strong> Bridge on Fred Jones Rd</li>
+                    <li><strong>Finish:</strong> Head Lake</li>
                     <li><strong>Duration:</strong> Approx. 2-3 Hours</li>
                     <li><strong>Shuttle:</strong> Service available from finish back to start.</li>
                 </ul>
