@@ -714,6 +714,19 @@ main {
 .alert-title { font-weight: 600; margin-bottom: 0.5rem; font-size: 0.9rem; }
 .alert-desc { opacity: 0.8; font-size: 0.8rem; line-height: 1.4; }
 
+/* In public/styles.css */
+.alert-item.no-alerts {
+    text-align: center;
+    color: var(--text-muted);
+}
+
+.stat-value .uv-desc {
+    font-size: 0.8em;
+    color: var(--text-muted);
+    margin-left: 4px;
+}
+
+
 /* Controls */
 .controls { grid-column: 3; grid-row: 2; }
 .control-group { margin-bottom: 2rem; }

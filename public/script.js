@@ -43,55 +43,64 @@ window.addEventListener('scroll', () => {
     }
     
     // Show/hide scroll to top button
-    if (window.scrollY > 300) {
-        scrollToTopBtn.classList.add('visible');
-    } else {
-        scrollToTopBtn.classList.remove('visible');
+    if (scrollToTopBtn) {
+        if (window.scrollY > 300) {
+            scrollToTopBtn.classList.add('visible');
+        } else {
+            scrollToTopBtn.classList.remove('visible');
+        }
     }
     
     lastScrollY = window.scrollY;
 });
 
-scrollToTopBtn.addEventListener('click', () => {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
+if (scrollToTopBtn) {
+    scrollToTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
     });
-});
+}
 
 // Contact form enhancement
 const contactForm = document.querySelector('.contact-form');
-const submitBtn = contactForm.querySelector('.submit-btn');
 
-contactForm.addEventListener('submit', function(e) {
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Sending...';
-    
-    // Re-enable button after 3 seconds (in case of form submission issues)
-    setTimeout(() => {
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Send Message';
-    }, 3000);
-});
+if (contactForm) {
+    const submitBtn = contactForm.querySelector('.submit-btn');
+
+    contactForm.addEventListener('submit', function(e) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending...';
+        
+        // Re-enable button after 3 seconds (in case of form submission issues)
+        setTimeout(() => {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Send Message';
+        }, 3000);
+    });
+}
 
 // Mobile menu toggle
 const mobileBtn = document.querySelector('.mobile-menu-btn');
 const navMenu = document.querySelector('.nav-menu');
 
-mobileBtn.addEventListener('click', () => {
-    mobileBtn.classList.toggle('active');
-    navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
-});
-
-// Close mobile menu when a link is clicked
-navMenu.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-        if (window.getComputedStyle(mobileBtn).display !== 'none') {
-            navMenu.style.display = 'none';
-            mobileBtn.classList.remove('active');
-        }
+if (mobileBtn && navMenu) {
+    mobileBtn.addEventListener('click', () => {
+        mobileBtn.classList.toggle('active');
+        navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
     });
-});
+
+    // Close mobile menu when a link is clicked
+    navMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.getComputedStyle(mobileBtn).display !== 'none') {
+                navMenu.style.display = 'none';
+                mobileBtn.classList.remove('active');
+            }
+        });
+    });
+}
 
 // Parallax effect for floating orbs
 window.addEventListener('mousemove', (e) => {
@@ -127,37 +136,44 @@ setInterval(updateGradient, 60000); // Update every minute
 
 /* --- Flow Dashboard Logic --- */
 if (document.getElementById('dashboard')) {
-    // Simulate live data updates
-    function updateWeatherData() {
-        const temp = document.getElementById('temp');
-        const humidity = document.getElementById('humidity');
-        const wind = document.getElementById('wind');
-        const pressure = document.getElementById('pressure');
-        
-        if (!temp) return;
+    // Real data is now fetched via PHP. Simulation logic removed.
 
-        // Simulate small fluctuations in data
-        const currentTemp = parseInt(temp.textContent);
-        const newTemp = currentTemp + (Math.random() - 0.5) * 2;
-        temp.textContent = Math.round(newTemp) + '°C';
+    // Chart.js Initialization
+    if (window.flowData && window.flowData.hourly && document.getElementById('temperatureChart')) {
+        const ctx = document.getElementById('temperatureChart').getContext('2d');
+        const hourlyData = window.flowData.hourly;
         
-        const currentHumidity = parseInt(humidity.textContent);
-        const newHumidity = Math.max(0, Math.min(100, currentHumidity + (Math.random() - 0.5) * 5));
-        humidity.textContent = Math.round(newHumidity) + '%';
-        
-        // Add visual feedback for data updates
-        [temp, humidity, wind, pressure].forEach(el => {
-            if(el) {
-                el.style.color = '#5b86e5';
-                setTimeout(() => {
-                    el.style.color = '#00d4ff';
-                }, 300);
+        // Format labels (e.g., "2:00 PM")
+        const labels = hourlyData.map(d => new Date(d.dt * 1000).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}));
+        const temps = hourlyData.map(d => d.temp);
+
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Temperature (°C)',
+                    data: temps,
+                    borderColor: '#00d4ff',
+                    backgroundColor: 'rgba(0, 212, 255, 0.1)',
+                    borderWidth: 2,
+                    tension: 0.4,
+                    fill: true,
+                    pointBackgroundColor: '#1a1a2e',
+                    pointBorderColor: '#00d4ff'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { grid: { color: 'rgba(255, 255, 255, 0.1)' }, ticks: { color: 'rgba(255, 255, 255, 0.7)' } },
+                    x: { grid: { display: false }, ticks: { color: 'rgba(255, 255, 255, 0.7)' } }
+                }
             }
         });
     }
-
-    // Update data every 30 seconds for demo
-    setInterval(updateWeatherData, 30000);
 
     // Interactive controls
     const controls = document.querySelector('.controls');
