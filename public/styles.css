@@ -751,8 +751,8 @@ main {
 }
 
 .control-input option {
-    background-color: #1a1a2e;
-    color: #ffffff;
+    background-color: #ffffff;
+    color: #333333;
 }
 
 .control-button {
