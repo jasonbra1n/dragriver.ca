@@ -219,3 +219,47 @@ faqQuestions.forEach(question => {
         item.classList.toggle('active');
     });
 });
+
+/* --- Shop Logic --- */
+const cart = [];
+
+function addToCart(product) {
+    cart.push(product);
+    updateCartUI();
+    console.log('Cart:', cart);
+}
+
+function updateCartUI() {
+    const cartCount = document.getElementById('cart-count');
+    if (cartCount) {
+        cartCount.textContent = cart.length;
+        cartCount.classList.add('bump'); // Animation class (needs CSS)
+        setTimeout(() => cartCount.classList.remove('bump'), 300);
+    }
+}
+
+// Event delegation for product buttons
+document.addEventListener('click', (e) => {
+    if (e.target.classList.contains('add-to-cart-btn') || e.target.closest('.add-to-cart-btn')) {
+        const btn = e.target.classList.contains('add-to-cart-btn') ? e.target : e.target.closest('.add-to-cart-btn');
+        const card = btn.closest('.product-card');
+        
+        if (card) {
+            const product = {
+                id: card.dataset.id,
+                title: card.querySelector('.product-title').textContent,
+                price: card.querySelector('.product-price').textContent
+            };
+            addToCart(product);
+            
+            // Visual feedback
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '✓ Added';
+            btn.style.background = 'linear-gradient(135deg, #00d4ff, #5b86e5)';
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.style.background = '';
+            }, 1500);
+        }
+    }
+});
