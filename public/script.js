@@ -138,43 +138,6 @@ setInterval(updateGradient, 60000); // Update every minute
 if (document.getElementById('dashboard')) {
     // Real data is now fetched via PHP. Simulation logic removed.
 
-    // Chart.js Initialization
-    if (window.flowData && window.flowData.hourly && document.getElementById('temperatureChart')) {
-        const ctx = document.getElementById('temperatureChart').getContext('2d');
-        const hourlyData = window.flowData.hourly;
-        
-        // Format labels (e.g., "2:00 PM")
-        const labels = hourlyData.map(d => new Date(d.dt * 1000).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}));
-        const temps = hourlyData.map(d => d.temp);
-
-        new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: 'Temperature (°C)',
-                    data: temps,
-                    borderColor: '#00d4ff',
-                    backgroundColor: 'rgba(0, 212, 255, 0.1)',
-                    borderWidth: 2,
-                    tension: 0.4,
-                    fill: true,
-                    pointBackgroundColor: '#1a1a2e',
-                    pointBorderColor: '#00d4ff'
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: { legend: { display: false } },
-                scales: {
-                    y: { grid: { color: 'rgba(255, 255, 255, 0.1)' }, ticks: { color: 'rgba(255, 255, 255, 0.7)' } },
-                    x: { grid: { display: false }, ticks: { color: 'rgba(255, 255, 255, 0.7)' } }
-                }
-            }
-        });
-    }
-
     // Interactive controls
     const controls = document.querySelector('.controls');
     if (controls) {
