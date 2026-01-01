@@ -750,6 +750,11 @@ main {
     background: rgba(255, 255, 255, 0.08);
 }
 
+.control-input option {
+    background-color: #1a1a2e;
+    color: #ffffff;
+}
+
 .control-button {
     width: 100%;
     padding: 0.75rem 1rem;
